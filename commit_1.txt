@@ -1,0 +1,83 @@
+const canvas = document.getElementById("theCanvas");
+const ctx = canvas.getContext("2d");
+canvas.width = 910;
+canvas.height = 910;
+
+
+//global vars : //
+var nombreDeCases = 10;
+var nbreDeCoupsJoués = 0;
+var couleursJoueurs = ["BLANCS", "BRUNS"];
+var tourDeJouer = "BLANCS";
+var cellSize = 90;
+var cellGap = 5;
+var gameGrid = [];
+
+
+// Dessin du terrain //
+const cases = { width: cellSize, height: cellSize, nombre:nombreDeCases }
+
+function drawCase() {
+    for(i=0; i<=nombreDeCases; i++){
+    ctx.strokeRect(x, y, cases.width, cases.height);
+    ctx.stroke;
+}}
+
+let x = 0;
+let y = 0;
+ctx.lineWidth = 1;
+ctx.strokeStyle = "tomato";
+
+function drawGrid() {
+
+    for (let i = 0; i < 10; i++) {
+        drawCase();
+        x += 91
+    }
+}
+
+
+
+drawGrid();
+
+//Compte des coups joués et couleur du joueur //
+function ncj() {
+    let message = document.getElementById("demo");
+  
+    message.innerHTML = `NOMBRE DE COUPS  : ${nbreDeCoupsJoués} `
+    nbreDeCoupsJoués += 1;
+}
+
+function Player() {
+    
+    let joueur = document.getElementById("joueur");
+    if(nbreDeCoupsJoués%2 == 0){
+    tourDeJouer=couleursJoueurs[1];
+    }else{tourDeJouer=couleursJoueurs[0]}
+    joueur.innerHTML = `C'EST AUX ${tourDeJouer} DE JOUER `
+
+
+}
+// Les Pions //
+class PionsBlancs{
+    constructor(x,y){}
+
+    draw(){ ctx.fillStyle = "brown";
+    ctx.fillRect(this.x, this.y, this.width, this.height);}
+}
+
+class PionsBruns{   
+    constructor(x,y){}
+
+    draw(){ ctx.fillStyle = "white";
+    ctx.fillRect(this.x, this.y, this.width, this.height);}
+}
+
+
+
+
+
+
+// Jouer le coup//
+//vérifier les length des tableau pour savoir s'il reste des pions //
+// BOUCLE DE JEU //

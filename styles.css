@@ -1,0 +1,5 @@
+*{box-sizing: border-box;}
+#theCanvas{height:901px; height: 901px; position:absolute;  top:0; left:0; margin:0; cursor:grab}
+#demo{font-size: 29px; font-weight: bold; font-family: 'Quintessential', cursive; text-align: center; text-decoration: underline; position:absolute; top:0; right:75px;}
+#joueur{font-size: 29px; font-weight: bold; font-family: 'Quintessential', cursive; text-align: center; text-decoration: underline; position:absolute; top:55px; right:75px;}
+button{position: absolute; top:25px; right:550px}
