@@ -1,4 +1,5 @@
-// Mon IP :78.192.226.69//
+// Mon IP :78.192.226.69 //
+// vidéo commit git https://youtu.be/GVEJJQUDVz4 //
 const canvas = document.getElementById("theCanvas");
 const ctx = canvas.getContext("2d");
 canvas.width = 901;
@@ -14,7 +15,7 @@ var couleursJoueurs = ["BLANCS", "BRUNS"];
 var ArrayPionsBlancs = [[45,45],[135,45],[225,45],[315,45],[405,45],[495,45],[585,45],[675,45],[765,45],[855,45]];
 var ArrayPionsBruns  = [[45,856],[135,856],[225,856],[315,856],[405,856],[495,856],[585,856],[675,856],[765,856],[855,856]];
 var cellSize = 90;
-const unnocupiedCase = globalGamePositions[i] == null;
+
 
 
 
@@ -46,88 +47,70 @@ InitialiseGrid();
 
 
 // Les Pions //
-class Pions{
-    constructor(x, y, color){  this.x = x;
-                                        this.y = y;
-                                        this.radius = 40;
-                                        this.color = color; }
- draw() {
-            { ctx.fillStyle = "this.color";
-              ctx.arc(ArrayPionsBlancs[i][0], 45, 40, 0, 2 * Math.PI);
-              ctx.fill()
-                                                }}
-                                            
+class Blanc{
+    constructor(x, y){ this.x = x;
+                       this.y = y;
+                       this.radius = 40;
+                       this.number = nbreDePions;
+                                                    }
+draw(){
+    ctx.fillStyle = 'Silver';
+    ctx.beginPath();
+    ctx.arc(this.x, this.y, this.radius, 0, Math.PI*2);
+    ctx.closePath;
+    ctx.fill();
+}}
+function initPionsBlancs() {
+                                pbArray = [];
+                                for(let i = 0; i<nbreDePions; i++){
+                                    let x = ArrayPionsBlancs[i][0];
+                                    let y = 45
+                                pbArray.push(new Blanc(x, y))
+                                
+                             }}
+initPionsBlancs();
 
-update(){}
-                                        }
-
-                            
-
-                        
- function InitializePions(){
-                                for(i=0; i<nbreDePions; i++){
-                                    let PionsBruns = new Pions(ArrayPionsBlancs[i][0], 45, 'Silver'); 
-                                    let PionsBlancs = new Pions (ArrayPionsBruns[i][0], 45, 'Maroon');
-                                    PionsBlancs.draw;
-                                    PionsBruns.draw;}}
-    InitializePions();              
- //  selectThisPion() { trouver une fonction pour sélectionner les pions// 
-
-    
-
-// *Initialisation des Pions* //
-
-// 1) Création des Pions //
-var pionsW = [];
-var pionsB = [];
-var w = [];
-var b = [];
-var g = [];
-var t =[[1,5], [2,5]]
-for(let i in t){console.log(t[0][0])}
-for (let i = 0; i < 10; i++) {
-    w.unshift("W");
-    b.push("B");
-}
-for (let i = 0; i < 80; i++) { g[i] = "null"; }
-var globalGamePositions = w.concat(g).concat(b);
-
-
-for (let i = 0; i < 10; i++) {
-                                 pionsW.unshift("W");
-                                 pionsB.unshift("B");
-                                                         }
-
-
-function updatePions() {
-    let textw = [];
-    let textb = [];
-
-
-    // 2) Dessin des Pions //
-    for (let i = 0; i < 10; i++) {
-
-
-        textw.push(45 + i * 90);
-        textb.push(45 + i * 90);
-        ctx.fillStyle = "Silver";
-        ctx.beginPath();
-        ctx.arc(textw[i], 45, 38, 0, 2 * Math.PI);
-        ctx.fill();
-        ctx.fillStyle = "Aqua";
-        ctx.beginPath();
-        ctx.arc(textw[i], 856, 38, 0, 2 * Math.PI);
-
-
-        ctx.fill();
-
-
-
+function dessinew(){
+    for(let i = 0; i<pbArray.length; i++){
+        pbArray[i].draw();
     }
-
+    requestAnimationFrame(dessinew);
 }
+dessinew();
 
-updatePions();
+
+class Brun{
+    constructor(x, y){ this.x = x;
+                       this.y = y;
+                       this.radius = 40;
+                       this.number = nbreDePions;
+                                                    }
+draw(){
+    ctx.fillStyle = 'Maroon';
+    ctx.beginPath();
+    ctx.arc(this.x, this.y, this.radius, 0, Math.PI*2);
+    ctx.closePath;
+    ctx.fill();
+}}
+function initPionsBruns() {
+                                pnArray = [];
+                                for(let i = 0; i<nbreDePions; i++){
+                                    let x = ArrayPionsBruns[i][0];
+                                    let y = 856
+                                pnArray.push(new Brun(x, y))
+                                
+                             }}
+initPionsBruns();
+
+function dessineb(){
+    for(let i = 0; i<pnArray.length; i++){
+        pnArray[i].draw();
+    }
+    requestAnimationFrame(dessineb);
+}
+dessineb();
+
+//JUSQU'ICI *Initialisation des Pions* //
 
 //Compte des coups joués et couleur du joueur //
 function ncj() {
@@ -150,15 +133,41 @@ function Player() {
 
 // JUSQU'ICI INITIALISATION DU JEU //
 // Jouer le coup//
+let joueur = document.getElementById("joueur");
+if (nbreDeCoupsJoués % 2 == 0) {
+    tourDeJouer = couleursJoueurs[1];
+} else { tourDeJouer = couleursJoueurs[0] }
+joueur.innerHTML = `C'EST AUX ${tourDeJouer} DE JOUER `
 
-                        canvas.addEventListener('click', function detCase (e) { let valX = e.clientX;
+//début joueuer//
+let g = [];
+for (let i = 0; i < 80; i++) { g[i] = "null"; }
+var globalGamePositions = pbArray.concat(g).concat(pnArray);
+
+
+
+                        canvas.addEventListener('click', function detCase (e) {
+                            
+                            
+                                                                                let valX = e.clientX;
                                                                                 let QX = Math.ceil(valX/cellSize);
                                                                                 let valY = e.clientY;
                                                                                 let QY = Math.ceil(valY/cellSize);
-                                                                                alert(10*(QY-1)+(QX)) })
+                                                                                const numéroDeCase = (10*(QY-1)+(QX));
+                                                                                const prevCase  = numéroDeCase - 10;
+                                                                                const nexCase   = numéroDeCase + 10;
+                                                                                const leftCase  = numéroDeCase - 1;
+                                                                                const rightCase = numéroDeCase + 1;
+                                                                                let cond = globalGamePositions[numéroDeCase]!=="null"
+                                                                                if(cond){console.log("CONSOLE")
+                                                                            }else{console.log("NON CONSOLE")}
+                                                                        });
+                                                                                
+                                                                                
+                                                        
   //ATTENTION PRIMORDIAL CHANGER LE SIGNE CAR SELON LA COULEUR LE SENS DE MOUVEMENT EST INVERSE //                                                                          alert (globalGamePositions[((QX-1)+ (QY)*10)])})
 
-// vérifier la meilleur formule avec floor ou ceil //
+
 //depuis case = 10(QY-1) + (QX) ==> case de résultat move = 10(QY)+(QX) //
 // POUR VÉRIFIER QUE JUMP EST POSSIBLE IL FAUT VÉRIFIER LES 2 CAS AVEC +1 ET -1  //
 // pour jump si sur case 10(QY-1) + (QX) il faut case 10(QY) + [(QX)+1] ou 10(QY) + [QX-1] occupée par autre couleur et on saute à 10(QY+1) + (QX+1) //
