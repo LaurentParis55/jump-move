@@ -144,26 +144,44 @@ let g = [];
 for (let i = 0; i < 80; i++) { g[i] = "null"; }
 var globalGamePositions = pbArray.concat(g).concat(pnArray);
 
+// Début code pour indiquer le mouvement //
+function movement(){whichCase();
+                    whichMove();}
 
+                   
 
+                                             
+                      function whichCase(){
                         canvas.addEventListener('click', function detCase (e) {
-                            
-                            
-                                                                                let valX = e.clientX;
-                                                                                let QX = Math.ceil(valX/cellSize);
-                                                                                let valY = e.clientY;
-                                                                                let QY = Math.ceil(valY/cellSize);
-                                                                                const numéroDeCase = (10*(QY-1)+(QX));
-                                                                                const prevCase  = numéroDeCase - 10;
-                                                                                const nexCase   = numéroDeCase + 10;
-                                                                                const leftCase  = numéroDeCase - 1;
-                                                                                const rightCase = numéroDeCase + 1;
-                                                                                let cond = globalGamePositions[numéroDeCase]!=="null"
-                                                                                if(cond){console.log("CONSOLE")
-                                                                            }else{console.log("NON CONSOLE")}
-                                                                        });
-                                                                                
-                                                                                
+                        let valX = e.clientX;
+                        let valY = e.clientY;
+                        let QX = Math.ceil(valX/cellSize);
+                        let QY = Math.ceil(valY/cellSize);
+                        const numéroDeCase = (10*(QY-1)+(QX));
+                        const prevCase  = numéroDeCase - 10;
+                        const nexCase   = numéroDeCase + 10;
+                        const leftCase  = numéroDeCase - 1;
+                        const rightCase = numéroDeCase + 1;                          
+                    
+                        document.getElementById("mvtGrabber").value=numéroDeCase;})}
+   
+    whichCase();                                                             
+       // function MOVE() //                                          
+        function move(){let laCase = document.getElementById("mvtGrabber").value;
+                        document.getElementById("demo").innerHTML=`VOUS ALLEZ Á LA CASE ${nexCase}` }                  
+                                      
+ 
+                                          
+
+ 
+                                                                                                
+                                                                                                                                
+     
+                                                                                                                         
+
+                                                        
+                                                        
+                                                           
                                                         
   //ATTENTION PRIMORDIAL CHANGER LE SIGNE CAR SELON LA COULEUR LE SENS DE MOUVEMENT EST INVERSE //                                                                          alert (globalGamePositions[((QX-1)+ (QY)*10)])})
 
@@ -174,7 +192,7 @@ var globalGamePositions = pbArray.concat(g).concat(pnArray);
                        
 // MOVE PASSAGE DE CASE N 0 CASE N+10 //
 // JUMP ON EST EN CASE N ON VOIT SI N+10-1 OU N+10+1 SONT OCCUPÉS ET SI OUI ON ARRIVE SUR LA CASE EN REFAISANT +10 +1 //
-
+// Les mouvements sont vers l'avant move, vers l'arriére backmove, latéral = flip ==< flip right et flip left,> et jump en mangeant 
 
 
 
