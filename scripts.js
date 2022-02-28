@@ -1,4 +1,4 @@
-// Mon IP :78.192.226.69 //
+
 // vidéo commit git https://youtu.be/GVEJJQUDVz4 //
 const canvas = document.getElementById("theCanvas");
 const ctx = canvas.getContext("2d");
