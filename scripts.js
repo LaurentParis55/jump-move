@@ -140,37 +140,47 @@ if (nbreDeCoupsJoués % 2 == 0) {
 joueur.innerHTML = `C'EST AUX ${tourDeJouer} DE JOUER `
 
 //début joueuer//
-let g = [];
-for (let i = 0; i < 80; i++) { g[i] = "null"; }
-var globalGamePositions = pbArray.concat(g).concat(pnArray);
+var globalGamePositions = Array(80).fill("null");
+for(let i=0; i<10; i++){
+    globalGamePositions.unshift("W");
+globalGamePositions.push("B");}
+
 
 // Début code pour indiquer le mouvement //
 function movement(){whichCase();
                     whichMove();}
 
-                   
-
-                                             
-                      function whichCase(){
+                    function whichCase(){
                         canvas.addEventListener('click', function detCase (e) {
                         let valX = e.clientX;
                         let valY = e.clientY;
                         let QX = Math.ceil(valX/cellSize);
                         let QY = Math.ceil(valY/cellSize);
                         const numéroDeCase = (10*(QY-1)+(QX));
-                        const prevCase  = numéroDeCase - 10;
-                        const nexCase   = numéroDeCase + 10;
-                        const leftCase  = numéroDeCase - 1;
-                        const rightCase = numéroDeCase + 1;                          
+                        const prevCase  = (10*(QY-2)+(QX));
+                        const nexCase   = (10*(QY)+(QX));
+                        const leftCase  = (10*(QY-1)+(QX-1));
+                        const rightCase =  (10*(QY-1)+(QX+1)); 
+                                                                          
                     
                         document.getElementById("mvtGrabber").value=numéroDeCase;})}
    
-    whichCase();                                                             
+    whichCase();      
+
+                    
+    
+    function move(){
+                     const disp = globalGamePositions[5];
+                     if(disp=="null"){ctx.fillStyle="fuchsia";}else{ctx.fillStyle="navy"}
+                    ctx.fillRect(100, 100, 250, 250);
+                    ctx.closePath()}
+    
+                    
+                        
+                  
+    
        // function MOVE() //                                          
-        function move(){let laCase = document.getElementById("mvtGrabber").value;
-                        document.getElementById("demo").innerHTML=`VOUS ALLEZ Á LA CASE ${nexCase}` }                  
-                                      
- 
+        
                                           
 
  
