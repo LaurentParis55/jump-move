@@ -157,26 +157,53 @@ function movement(){whichCase();
                         let QX = Math.ceil(valX/cellSize);
                         let QY = Math.ceil(valY/cellSize);
                         const numéroDeCase = (10*(QY-1)+(QX));
-                        const prevCase  = (10*(QY-2)+(QX));
-                        const nexCase   = (10*(QY)+(QX));
-                        const leftCase  = (10*(QY-1)+(QX-1));
-                        const rightCase =  (10*(QY-1)+(QX+1)); 
-                                                                          
-                    
-                        document.getElementById("mvtGrabber").value=numéroDeCase;})}
+                        const nextCase = numéroDeCase + 10;
+                        const previousCase = numéroDeCase - 10;
+                        const leftCase = numéroDeCase - 1;
+                        const rightCase = numéroDeCase + 1;
+                       
+                        document.getElementById("mvtGrabber").value=`Le numéro de case est ${numéroDeCase}`;})}
    
-    whichCase();      
+  
+              //garder la funct(e); écrire des conditions pour la dispo des cases de mouvements potentiels // 
+              // move c'est quand on est dans le sens + du canvas et move back dans le sens <0 du canvas //     
+    
+    function move(){  
+        canvas.addEventListener('click', function detCase (e) {
+        let valX = e.clientX;
+        let valY = e.clientY;
+        let QX = Math.ceil(valX/cellSize);
+        let QY = Math.ceil(valY/cellSize);
+        const numéroDeCase = (10*(QY-1)+(QX));
+         if(numéroDeCase>=91){alert("MOVE IS NOT POSSIBLE")
+         }else{
+        document.getElementById("mvtGrabber").value=numéroDeCase;}})}
 
-              //garder la funct(e); écrire des conditions pour la dispo des cases de mouvements potentiels //      
+        function moveB(){  
+            canvas.addEventListener('click', function detCase (e) {
+            let valX = e.clientX;
+            let valY = e.clientY;
+            let QX = Math.ceil(valX/cellSize);
+            let QY = Math.ceil(valY/cellSize);
+            const numéroDeCase = (10*(QY-1)+(QX));
+             if(numéroDeCase<=10){alert("MOVE BACK IS NOT POSSIBLE")
+             }else{
+            document.getElementById("mvtGrabber").value=numéroDeCase;}})}
     
-    function move(){
-                     const disp = globalGamePositions[5];
-                     if(disp=="null"){ctx.fillStyle="fuchsia";}else{ctx.fillStyle="navy"}
-                    ctx.fillRect(100, 100, 250, 250);
-                    ctx.closePath()}
-    
-                    
-                        
+            function flipR(){  
+                canvas.addEventListener('click', function detCase (e) {
+                let valX = e.clientX;
+                let valY = e.clientY;
+                let QX = Math.ceil(valX/cellSize);
+                let QY = Math.ceil(valY/cellSize);
+                const numéroDeCase = (10*(QY-1)+(QX));
+                 if(numéroDeCase %10 == 0){alert("FLIP RIGHT IS NOT POSSIBLE")
+                 }else{
+                document.getElementById("mvtGrabber").value=numéroDeCase;}})}
+        
+              
+                     
+      //CONTINUER Á LES FUNCTIONS POUR TOUS LES MOUVEMENTS //                  
                   
     
        // function MOVE() //                                          
