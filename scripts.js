@@ -167,7 +167,7 @@ function movement(){whichCase();
    
     whichCase();      
 
-                    
+              //garder la funct(e); écrire des conditions pour la dispo des cases de mouvements potentiels //      
     
     function move(){
                      const disp = globalGamePositions[5];
