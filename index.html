@@ -9,13 +9,32 @@
     <title>GAME MOVEJUMP</title>
     <link rel="stylesheet" href="styles.css">
 </head>
-<body>
+<body onload="moveH()">
     <canvas id="theCanvas"></canvas>
-    <div id="affichage">
+<div id="affichage">
     <p id="demo"></p>
     <p id="joueur"></p>
-    </div>
-    <button onclick ="ncj(), Player()">CLICK</button>
+    <input id="mvtGrabber" type="text">
+    
+    <nav>
+        <button onclick="ncj(), Player()"> TRY</button>
+        <div class="buttonContainer">
+        <button class="mover" id="moveButton" onclick="move()">MOVE</button>
+        <button class="mover" id="moveBButton" onclick="moveB()">MOVE_B</button>
+        </div>
+        <div class="buttonContainer">
+            <button class="mover" onclick="jump()">JUMP_L</button>
+            <button class="mover" onclick="jump()">JUMP_R</button>
+            </div>
+            <div class="buttonContainer">
+                <button class="mover" id ="flipLButton"  onclick="flipL()">FLIP_L</button>
+                <button class="mover" id="flipRButton" onclick="flipR()">FLIP_R</button>
+                </div>        
+    </nav>
+</div>
+    
+    
+
     <script src="scripts.js"></script>
 </body>
 </html>
