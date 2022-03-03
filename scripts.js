@@ -20,6 +20,21 @@ const vacantCase = { color : "none",  score:"none"}
 const PionBlancs = { color : "white",  score:250}
 const PionsBruns = { color : "brown", score:250}
 
+// Fonction pour récupérer les demandes de mouvements //
+
+
+
+document.body.addEventListener('load', moveH())
+
+function moveH(){ window.addEventListener('keydown',  function(e){if(e.key == 'm'){console.log("coucou")
+}else{console.log('not coucou')}
+})}
+
+
+
+
+
+
 
 var T = [{color : "brown", score : 250}, {color:"white" , score:295}]
 
@@ -29,6 +44,7 @@ var T = [{color : "brown", score : 250}, {color:"white" , score:295}]
 
 // Dessin du terrain //
 // DESSIN DES CASES//
+
 class Cases{
                 constructor(x,y,color){  this.color = color;
                                          this.x = x;
@@ -153,83 +169,68 @@ globalGamePositions.push(PionsBruns)}
 // Début code pour indiquer le mouvement //
 /*function movement(){whichCase();
                     whichMove();} */
-function moveH(){ window.addEventListener('keydown',  function(e){if(e.key == 'm'){console.log("coucou")
-}else{console.log('not coucou')}
-})}
+
    
   
               //garder la funct(e); écrire des conditions pour la dispo des cases de mouvements potentiels // 
               // move c'est quand on est dans le sens + du canvas et move back dans le sens <0 du canvas //     
-   function playTour(){movement()}
-   
-   
-   
-   
-              function movement(){ canvas.addEventListener('click', function detCase (e) {
-        let valX = e.clientX;
-        let valY = e.clientY;
-        let QX = Math.ceil(valX/cellSize);
-        let QY = Math.ceil(valY/cellSize);
-        const numéroDeCase = (10*(QY-1)+(QX));
-        document.getElementById("mvtGrabber").value=numéroDeCase;
-        document.getElementById("demo").innerHTML = `VOTRE CASE DE DÉPART EST ${numéroDeCase}`})}
+   function which(){
+                         canvas.addEventListener('click', function(e) {
+                         let valX = e.clientX;
+                         let valY = e.clientY;
+                         let QX = Math.ceil(valX/cellSize);
+                         let QY = Math.ceil(valY/cellSize);
+                         const numéroDeCase = (10*(QY-1)+(QX));
+                         document.getElementById("mvtGrabber").value=numéroDeCase;
+                         document.getElementById("demo").innerHTML = `VOTRE CASE DE DÉPART EST ${numéroDeCase}`});
 
-        function move(){  
-        
-            if(numéroDeCase>=91){alert("MOVE IS NOT POSSIBLE")
-            }else{
-           document.getElementById("demo").innerHTML = `CASE D'ARRIVÉE EST ${numéroDeCase + 1}`}}
+                        
 
-playTour()
-    function move(){  
-        
-         if(numéroDeCase>=91){alert("MOVE IS NOT POSSIBLE")
-         }else{
-        document.getElementById("demo").innerHTML = `CASE D'ARRIVÉE EST ${numéroDeCase + 1}`}}
+     function getMove(){                    
+                        
+                         const canMoveB = new Boolean();
+                         const canFlipL = new Boolean();
+                         const canFlipR = new Boolean();
+                         const canJumpL = new Boolean();
+                         const canJumpR = new Boolean();
+                        
+                         if(numéroDeCase>=91){canMove = false}
+                         if(numéroDeCase<=10){canMoveB = false}
+                         if(numéroDeCase %10 == 0){canFlipR = false}
+                         if((numéroDeCase - 1) % 10 == 0){canFlipL = false}
+                        
+                        }} which();
 
-        function moveB(){  
-            canvas.addEventListener('click', function detCase (e) {
-            let valX = e.clientX;
-            let valY = e.clientY;
-            let QX = Math.ceil(valX/cellSize);
-            let QY = Math.ceil(valY/cellSize);
-            const numéroDeCase = (10*(QY-1)+(QX));
-             if(numéroDeCase<=10){alert("MOVE BACK IS NOT POSSIBLE")
-             }else{
-            document.getElementById("mvtGrabber").value=numéroDeCase;}})}
+                        function move(){  
+                            const canMove  = new Boolean();  
+                            if(numéroDeCase>=91){canMove = false}  
+                            if(canMove) {
+                                console.log("OK, accès autorisé.")
+                            }else{ console.log("canmove")}
+                                                                     }    
+                            
+           
+               
+                                                                                                      
+
+                                              
+                         
+                        
+                                                                              
+                        
+                        
+                        
     
-            function flipR(){  
-                canvas.addEventListener('click', function detCase (e) {
-                let valX = e.clientX;
-                let valY = e.clientY;
-                let QX = Math.ceil(valX/cellSize);
-                let QY = Math.ceil(valY/cellSize);
-                const numéroDeCase = (10*(QY-1)+(QX));
-                 if(numéroDeCase %10 == 0){alert("FLIP RIGHT IS NOT POSSIBLE")
-                 }else{
-                document.getElementById("mvtGrabber").value=numéroDeCase;}})}
-        
-              /*  function flipL(){  
-                    canvas.addEventListener('click', function detCase (e) {
-                    let valX = e.clientX;
-                    let valY = e.clientY;
-                    let QX = Math.ceil(valX/cellSize);
-                    let QY = Math.ceil(valY/cellSize);
-                    const numéroDeCase = (10*(QY-1)+(QX));
-                     if((numéroDeCase - 1) % 10 == 0){alert("FLIP LEFT IS NOT POSSIBLE")
-                     }else{
-                    document.getElementById("mvtGrabber").value=numéroDeCase;}})}
-            */
-              function flipL(){for (let pion of globalGamePositions) {
-                console.log('Couleur de Pion ' + pion.color + ' avec un score de ' + pion.score);
-                alert(globalGamePositions.length)
-             }}
-                    
-      //CONTINUER Á LES FUNCTIONS POUR TOUS LES MOUVEMENTS //                  
-                  
     
-       // function MOVE() //                                          
+   
+   
+   
+      
         
+          
+           
+    
+           
                                           
 
  
@@ -242,7 +243,8 @@ playTour()
                                                         
                                                            
                                                         
-  //ATTENTION PRIMORDIAL CHANGER LE SIGNE CAR SELON LA COULEUR LE SENS DE MOUVEMENT EST INVERSE //                                                                          alert (globalGamePositions[((QX-1)+ (QY)*10)])})
+  //ATTENTION PRIMORDIAL CHANGER LE SIGNE CAR SELON LA COULEUR LE SENS DE MOUVEMENT EST INVERSE //                                             
+    
 
 
 //depuis case = 10(QY-1) + (QX) ==> case de résultat move = 10(QY)+(QX) //
