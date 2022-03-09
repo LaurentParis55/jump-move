@@ -9,7 +9,8 @@
     <title>GAME MOVEJUMP</title>
     <link rel="stylesheet" href="styles.css">
 </head>
-<body>
+<body onload="GlobalInit()">
+
     <canvas id="theCanvas"></canvas>
 <div id="affichage">
     <p id="demo"></p>
@@ -28,14 +29,17 @@
             </div>
             <div class="buttonContainer">
                 <button class="mover" id ="flipLButton"  onclick="flipL()">FLIP_L</button>
-                <button class="mover" id="flipRButton" onclick="flipR()">FLIP_R</button>
+                <button class="mover" id="flipRButton" onclick="flipR(), top()">FLIP_R</button>
                 </div>        
     </nav>
 </div>
     
     
 
-    <script src="scripts.js"></script>
+    <script src="scriptOfGame.js" type="text/javascript">
+
+
+    </script>
 </body>
 </html>
 
