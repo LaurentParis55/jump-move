@@ -69,20 +69,29 @@ function initPionsBruns(){ PionsBrunsArray = [];
                             setBrun.draw()
                             }}
 
-function which(){ canvas.addEventListener('click', function(e) {
-                                                                  let valX = e.clientX;
-                                                                  let valY = e.clientY;
-                                                                  let QX = Math.ceil(valX/cellSize);
-                                                                  let QY = Math.ceil(valY/cellSize);
-                                                                  const numéroDeCase = (10*(QY-1)+(QX));
-                                                                  document.getElementById("mvtGrabber").value=numéroDeCase;
-                                                                  document.getElementById("demo").innerHTML = `VOTRE CASE DE DÉPART EST ${numéroDeCase}`});
-   
-                                                               
-                                                                
-                                                                }
 
-which();
+                            function which() {canvas.addEventListener('click', function(e) {
+                              let valX = e.clientX/cellSize;
+                              let valY = e.clientY/cellSize;
+                              let colX = Math.ceil(valX);
+                              let colY = Math.ceil(valY);
+                              let milX = Number( (colX-1)*cellSize + 45); 
+                              let milY = Number( (colY-1)*cellSize + 45);
+                              const numéroDeCase = (10*(colY-1)+(colX));
+                              document.getElementById("mvtGrabber").value=numéroDeCase;
+                              document.getElementById("demo").innerHTML = `VOTRE CASE DE DÉPART EST ${numéroDeCase}`;
+                            if(globalGamePositions[Number(numéroDeCase-10)].color == "none"){ctx.fillStyle="Tomato";
+                                                                                              ctx.beginPath();
+                                                                                              ctx.arc(milX, milY-cellSize, 40, 0, Math.PI*2);
+                                                                                              ctx.fill() }else{alert("MOUVEMENT IMPOSSIBLE");}
+                            }
+                              )}
+
+                  
+which();                                                           
+
+ 
+  
 
 function ncj() { let message = document.getElementById("demo");
                  message.innerHTML = `NOMBRE DE COUPS  : ${nbreDeCoupsJoués} `
@@ -107,7 +116,7 @@ function move(){
                 let nextCase = Number(z.value)+10;
                 const contains = globalGamePositions [nextCase].color;  
                 if(contains !== "none"){alert("MOUVEMENT IMPOSSIBLE")
-              }else{document.getElementById("demo").innerHTML=globalGamePositions.top;
+              }else{document.getElementById("demo").innerHTML=globalGamePositions[nextCase].color;
                 ctx.fillStyle = 'Tomato';
               ctx.arc(nextCase, 250, 550, 0, Math.PI*2);
             ctx.fill()}                                                                                                           
@@ -115,28 +124,17 @@ function move(){
 
 function moveB(){
   let z = mvtGrabber;
-  let prevCase = Number(z.value)-10;
+  let prevCase = Number(z.value-10);
   const containB = globalGamePositions [prevCase].color;  
-  if(containB !== "none"){alert("MOUVEMENT IMPOSSIBLE")
-}else{ctx.fillStyle = 'Silver';
+  if(containB !== "none"){alert("MOUVEMENT IMPOSSIBLE");
+}else{
+  alert(containB);
+  ctx.fillStyle = 'Silver';
 ctx.arc(250, 250, 40, 0, Math.PI*2);
 ctx.fill()}                                                                                                        
 }
 
-function plot(){ canvas.addEventListener('click', function(e) {
-  let valX = e.clientX;
-  let valY = e.clientY;
- var h = Math.ceil(valX % 90) ; 
- var t= Math.ceil(valY % 90) ; 
-  document.getElementById("mvtGrabber").value = Math.ceil(valX%90); 
-  document.getElementById("demo").innerHTML = Math.ceil(valX%90)+25; 
-  ctx.fillStyle = 'Silver';
-ctx.arc(h, 250, 40, 0, Math.PI*2);
-ctx.fill()})} 
- 
 
-
-plot();
                                                                                                             
 
 function GlobalInit(){InitialiseGrid();
