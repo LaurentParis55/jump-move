@@ -9,6 +9,7 @@ var nbreDeCoupsJoués = 1;
 var couleursJoueurs = ["BLANCS", "BRUNS"];
 var globalGamePositions = [];
 var cellSize = 90;
+var dMve;
 const vacantCase = { color : "none",  score:"none"}
 const PionBlancs = { color : "white",  score:250}
 const PionsBruns = { color : "brown", score:250}
@@ -69,29 +70,8 @@ function initPionsBruns(){ PionsBrunsArray = [];
                             setBrun.draw()
                             }}
 
-
-                            function which() {canvas.addEventListener('click', function(e) {
-                              let valX = e.clientX/cellSize;
-                              let valY = e.clientY/cellSize;
-                              let colX = Math.ceil(valX);
-                              let colY = Math.ceil(valY);
-                              let milX = Number( (colX-1)*cellSize + 45); 
-                              let milY = Number( (colY-1)*cellSize + 45);
-                              const numéroDeCase = (10*(colY-1)+(colX));
-                              document.getElementById("mvtGrabber").value=numéroDeCase;
-                              document.getElementById("demo").innerHTML = `VOTRE CASE DE DÉPART EST ${numéroDeCase}`;
-                            if(globalGamePositions[Number(numéroDeCase-10)].color == "none"){ctx.fillStyle="Tomato";
-                                                                                              ctx.beginPath();
-                                                                                              ctx.arc(milX, milY-cellSize, 40, 0, Math.PI*2);
-                                                                                              ctx.fill() }else{alert("MOUVEMENT IMPOSSIBLE");}
-                            }
-                              )}
-
-                  
-which();                                                           
-
- 
-  
+//  TERRAIN INITIALISÉ //
+                          
 
 function ncj() { let message = document.getElementById("demo");
                  message.innerHTML = `NOMBRE DE COUPS  : ${nbreDeCoupsJoués} `
@@ -101,41 +81,73 @@ function ncj() { let message = document.getElementById("demo");
 
 function Player() {
                      let joueur = document.getElementById("joueur");
+                     
                         if (nbreDeCoupsJoués % 2 == 0) {
                                                          tourDeJouer = couleursJoueurs[0];
-                                                         } else { tourDeJouer = couleursJoueurs[1] }
+                                                         dMve = 10;
+
+                                                         } else { tourDeJouer = couleursJoueurs[1];
+                                                                  dMve = -10 }
                                                          joueur.innerHTML = `AUX ${tourDeJouer} DE JOUER `
                                                                                                                      }
-                                                                                                                     
-                                                                                                                     
 
-                
+  /*function move(){
 
-function move(){
-                let z = mvtGrabber;
-                let nextCase = Number(z.value)+10;
-                const contains = globalGamePositions [nextCase].color;  
-                if(contains !== "none"){alert("MOUVEMENT IMPOSSIBLE")
-              }else{document.getElementById("demo").innerHTML=globalGamePositions[nextCase].color;
-                ctx.fillStyle = 'Tomato';
-              ctx.arc(nextCase, 250, 550, 0, Math.PI*2);
-            ctx.fill()}                                                                                                           
-}
+                       let z = mvtGrabber;
+                       let nextCase = Number(z.value)+dMve;
+                       alert(nextCase);
+                       const contains = globalGamePositions [nextCase].color;  
+                       if(contains !== "none"){alert("MOUVEMENT IMPOSSIBLE")
+                       }else{
+                        alert(dMve); 
+                        plot()}
+                                        }  */
+                                        
+                                        function move(){ canvas.addEventListener('click', function(e) {
+                                          let valX = e.clientX/cellSize;
+                                          let valY = e.clientY/cellSize;
+                                          let colX = Math.ceil(valX);
+                                          let colY = Math.ceil(valY);
+                                         
+                                          let milX = Number( (colX-1)*cellSize + 45); 
+                                          let milY = Number( (colY-1)*cellSize + 45);
+                                          let z = mvtGrabber;
+                                         
+                                          const numéroDeCase = (10*(colY-1)+(colX));
+                                          document.getElementById("mvtGrabber").value = numéroDeCase ;
+                                          if(nbreDeCoupsJoués % 2 == 0){dMve = 10
+                                          }else{dMve = -10};
+                                          let nextCase = Number(z.value) + dMve;
+                                         
+                                          const contains = globalGamePositions [nextCase].color; 
+                                          alert(contains);
+                                          if(contains !== "none"){alert("MOUVEMENT IMPOSSIBLE")
+                                         }else{plot()}
+                                                                                                          })}
+     function plot(){console.log("coucou")}
+                                          
 
-function moveB(){
-  let z = mvtGrabber;
-  let prevCase = Number(z.value-10);
-  const containB = globalGamePositions [prevCase].color;  
-  if(containB !== "none"){alert("MOUVEMENT IMPOSSIBLE");
-}else{
-  alert(containB);
-  ctx.fillStyle = 'Silver';
-ctx.arc(250, 250, 40, 0, Math.PI*2);
-ctx.fill()}                                                                                                        
-}
 
+                                          // 2eme possde MOVE //
 
-                                                                                                            
+                                      /*    function which() {canvas.addEventListener('click', function(e) {
+                                            let valX = e.clientX/cellSize;
+                                            let valY = e.clientY/cellSize;
+                                            let colX = Math.ceil(valX);
+                                            let colY = Math.ceil(valY);
+                                            let milX = Number( (colX-1)*cellSize + 45); 
+                                            let milY = Number( (colY-1)*cellSize + 45);
+                                            const numéroDeCase = (10*(colY-1)+(colX));
+                                            document.getElementById("mvtGrabber").value=numéroDeCase;
+                                            document.getElementById("demo").innerHTML = `VOTRE CASE DE DÉPART EST ${numéroDeCase}`;
+                                          if(globalGamePositions[Number(numéroDeCase-10)].color == "none"){ctx.fillStyle="Tomato";
+                                                                                                            ctx.beginPath();
+                                                                                                            ctx.arc(milX, milY-cellSize, 40, 0, Math.PI*2);
+                                                                                                            ctx.fill() }else{alert("MOUVEMENT IMPOSSIBLE");}
+                                          }
+                                            )}
+                                                 */                                                
+                                                                                                                   
 
 function GlobalInit(){InitialiseGrid();
     initPionsBlancs();
@@ -143,3 +155,10 @@ function GlobalInit(){InitialiseGrid();
  
   function PlayTheGame(){ncj();
                          Player();}                   
+                                                    
+     
+     
+                                                                                           
+     
+
+
