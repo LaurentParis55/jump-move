@@ -115,17 +115,23 @@ function Player() {
                                          
                                           const numéroDeCase = (10*(colY-1)+(colX));
                                           document.getElementById("mvtGrabber").value = numéroDeCase ;
-                                          if(nbreDeCoupsJoués % 2 == 0){dMve = 10
-                                          }else{dMve = -10};
+                                          if(nbreDeCoupsJoués % 2 == 0){dMve = 10; ctx.fillStyle = "Silver" 
+                                          }else{dMve = -10; ctx.fillStyle = "Brown"};
                                           let nextCase = Number(z.value) + dMve;
-                                         
                                           const contains = globalGamePositions [nextCase].color; 
-                                          alert(contains);
-                                          if(contains !== "none"){alert("MOUVEMENT IMPOSSIBLE")
-                                         }else{plot()}
-                                                                                                          })}
-     function plot(){console.log("coucou")}
                                           
+                                          if(contains !== "none"){alert("MOUVEMENT IMPOSSIBLE")
+                                         }else{ctx.beginPath();
+                                          if(nbreDeCoupsJoués % 2 == 0){Y = milX + cellSize
+                                          }else{Y = milX - cellSize}
+
+                                               ctx.arc(milX, Y, 40, 0, Math.PI*2);
+                                               ctx.fill(); }
+                                                            })}
+  
+       
+ move()   
+                          
 
 
                                           // 2eme possde MOVE //
@@ -154,7 +160,8 @@ function GlobalInit(){InitialiseGrid();
     initPionsBruns()}
  
   function PlayTheGame(){ncj();
-                         Player();}                   
+                         Player();
+                         move()}                   
                                                     
      
      
