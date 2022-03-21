@@ -78,6 +78,7 @@ function movement(){ canvas.addEventListener('click', function(e) {
                    if(tourDeJouer == "BLANCS"){ const contains = globalGamePositions [numéroDeCase + 10].color;
                                                  if(contains !== "none"){alert("MOUVEMENT IMPOSSIBLE")
                                                 }else{alert("BLANCS");
+                                                
                                                 ctx.fillStyle ="Silver";
                                                 ctx.beginPath();
                                                 ctx.arc(milX, milY + cellSize, 40, 0, Math.PI*2);
@@ -91,6 +92,7 @@ function movement(){ canvas.addEventListener('click', function(e) {
                                                 const contains = globalGamePositions [numéroDeCase - 10].color;
                                                  if(contains !== "none"){alert("MOUVEMENT IMPOSSIBLE")
                                                 }else{alert("BRUNS");
+                                                
                                                 ctx.fillStyle ="Maroon";
                                                 ctx.beginPath();
                                                 ctx.arc(milX, milY - cellSize, 40, 0, Math.PI*2);
