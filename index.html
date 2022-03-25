@@ -9,18 +9,31 @@
     <title>GAME MOVEJUMP</title>
     <link rel="stylesheet" href="styles.css">
 </head>
-<body onload="GlobalInit()">
-<!-- Le terrain de jeu -->
+<body onload="FirstInit()">
+<!-- ICI AVEC FIRSTINIT() LE JEU EST INITIALISÉ -->
     <canvas id="theCanvas"></canvas>
 
     <!-- L'affichage qui gère le jeu-->
 <div id="affichage">
+    <div class="rubrique">
+        <span>
+    <label for="mvtGrabber">CASE DÉPART :</label>
+    <input id="mvtGrabber" type="text" autofocus>
+</span>
+<br/> <br/>
+<span>
+    <label for="caseTo">CASE ARRIVÉ :</label>
+    <input id="Arrivée" type="text">
+</span>
+</div>
+<div class="rubrique">
     <p id="demo"></p>
     <p id="joueur"></p>
-    <input id="mvtGrabber" type="text">
+</div>
+    
     <!-- Le nav contenant les boutons -->
     <nav>
-        <button onclick="play()"> TRY</button>
+        <button onclick="ncjPlayer()"> TRY</button>
         <div class="buttonContainer">
         <button class="mover" id="moveButton" onclick="move()">MOVE</button>
         <button class="mover" id="moveBButton" onclick="moveB()">MOVE_B</button>

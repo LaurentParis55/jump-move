@@ -6,14 +6,17 @@ canvas.height = 901;
 var nbreDePions = 10;
 var nombreDeCases = 10;
 var nbreDeCoupsJoués = 1;
-var couleursJoueurs = ["BLANCS", "BRUNS"];
+var playerColor = ["BLANCS", "BRUNS"];
 var globalGamePositions = [];
 var cellSize = 90;
-var dMve;
+var nombreDeCoups = 1;
+var message = document.getElementById("demo");
+var joueur = document.getElementById("joueur");
+var player
 const vacantCase = { color : "none",  score:"none"}
-const PionBlancs = { color : "white",  score:250}
-const PionsBruns = { color : "brown", score:250}
-let Mobile = true;
+const PionBlancs = { color : 'Silver',  score:250}
+const PionsBruns = { color : 'Maroon', score:250}
+const cond = nbreDeCoupsJoués % 2 == 0;
 
 var globalGamePositions = Array(80).fill(vacantCase);
 for(let i=0; i<10; i++){
@@ -42,78 +45,31 @@ function InitialiseGrid(){
 
 
 class Pions {
-              constructor(x, y, color, score){ this.x = x;
+              constructor(x, y, color, score, det){ this.x = x;
                                                this.y = y;
                                                this.color = color;
-                                               this.score = 100     }
+                                               this.score = 100;
+                                               this.det = det;    }
 
     draw(){  ctx.fillStyle = this.color;
              ctx.beginPath();
              ctx.arc(this.x, this.y, 40, 0, Math.PI*2);
-             ctx.closePath;
-             ctx.fill();} 
-                            }                                
+             ctx.fill();
+             ctx.closePath}
+                            
+            
+    move(){                                             
+                ctx.fillStyle = this.color;
+                ctx.beginPath();
+                ctx.arc(milX, milY + cellSize, 40, 0, Math.PI*2);
+                ctx.fill(); }
+                                                                      }                                
                                                                 
-function play(){
-                  ncj();
-                  Player();
-                  movement();
-                  console.log("coucou"); }
 
 
 
-function movement(){ canvas.addEventListener('click', function(e) {
-                                                                  let valX = e.clientX/cellSize;
-                                                                  let valY = e.clientY/cellSize;
-                                                                  let colX = Math.ceil(valX);
-                                                                  let colY = Math.ceil(valY);
-                                                                  let milX = Number( (colX-1)*cellSize + 45); 
-                                                                  let milY = Number( (colY-1)*cellSize + 45);
-                                                                  let z = mvtGrabber;
-                                                                  const numéroDeCase = (10*(colY-1)+(colX));
-                                                                  document.getElementById("mvtGrabber").value = numéroDeCase ;
 
-
-                                                                 
-                   if(tourDeJouer == "BLANCS"){ const contains = globalGamePositions [numéroDeCase + 10].color;
-                                                 if(contains !== "none"){alert("MOUVEMENT IMPOSSIBLE")
-                                                }else{alert("BLANCS");
-                                                
-                                                ctx.fillStyle ="Silver";
-                                                ctx.beginPath();
-                                                ctx.arc(milX, milY + cellSize, 40, 0, Math.PI*2);
-                                                ctx.fill();
-                                                globalGamePositions[numéroDeCase + 10] = "BLANCS";
-                                                globalGamePositions[numéroDeCase] = "none"; 
-                                                console.log(globalGamePositions)}
-                                              
-                                                }else{
-
-                                                const contains = globalGamePositions [numéroDeCase - 10].color;
-                                                 if(contains !== "none"){alert("MOUVEMENT IMPOSSIBLE")
-                                                }else{alert("BRUNS");
-                                                
-                                                ctx.fillStyle ="Maroon";
-                                                ctx.beginPath();
-                                                ctx.arc(milX, milY - cellSize, 40, 0, Math.PI*2);
-                                                ctx.fill();
-                                                globalGamePositions[numéroDeCase - 10] = "BRUNS";
-                                                globalGamePositions[numéroDeCase] = "none"; 
-                                                console.log(globalGamePositions) }}
-                                              })}
-                                            
-                                            
-                                            
-                                            
-                                            
-                                            
-                                            
-                                          
-                      
-                    
-                
-              
-                                                                                                    
+                                                                                        
                                                                                                                 
 
 function initPionsBlancs(){ PionsBlancsArray = [];
@@ -135,44 +91,78 @@ function initPionsBruns(){ PionsBrunsArray = [];
                             setBrun.draw()
                             }}
 
- function moveBrowns(){
-                              ctx.fillStyle ="Maroon";
-                              ctx.beginPath();
-                              ctx.arc(250, 575, 40, 0, Math.PI*2);
-                              ctx.fill(); }
-                          
+ 
+                             
 //  TERRAIN INITIALISÉ //
                           
 
-function ncj() { let message = document.getElementById("demo");
-                 message.innerHTML = `NOMBRE DE COUPS  : ${nbreDeCoupsJoués} `
-                 nbreDeCoupsJoués += 1;                                         
-                                                                                  }              
+         
+// FAIRE LA BOUCLE DE JEU //
 
 
-function Player() {
-                     let joueur = document.getElementById("joueur");
-                     
-                        if (nbreDeCoupsJoués % 2 == 0) {
-                                                         tourDeJouer = couleursJoueurs[0];
-                                                         dMve = 10;
+// donne le joueur et le nombre de coups //
+function ncjPlayer() {
+                        
 
-                                                         } else { tourDeJouer = couleursJoueurs[1];
-                                                                  dMve = -10 }
-                                                         joueur.innerHTML = `AUX ${tourDeJouer} DE JOUER `
-                                                                                                                     }
-
+   message.innerHTML = `NOMBRE DE COUPS  : ${nbreDeCoupsJoués} `;
+   
+   if(nbreDeCoupsJoués % 2 == 0){player = playerColor[1];
+  }else{player = playerColor[0]; }
+  joueur.innerHTML = `AUX ${player} DE JOUER `;
   
-                                      
+
+    
+  }
+  
+  
+                                   
  
-                          
+   function movement(){ canvas.addEventListener('click', function(e) {
+    let valX = e.clientX/cellSize;
+    let valY = e.clientY/cellSize;
+    let colX = Math.ceil(valX);
+    let colY = Math.ceil(valY);
+    let milX = Number( (colX-1)*cellSize + 45); 
+    let milY = Number( (colY-1)*cellSize + 45);
+    let z = mvtGrabber;
+    const numéroDeCase = (10*(colY-1)+(colX));
+    if( nbreDeCoupsJoués %2 == 0 ){discr = numéroDeCase - 10
+    }else{discr = numéroDeCase + 10}
+    const contains = globalGamePositions[discr];
+    
+  ncjPlayer();
+  console.log(contains);
+  if(contains.color == 'none' && nbreDeCoupsJoués % 2 == 0){    ctx.fillStyle = PionBlancs.color;
+                                                                ctx.beginPath();
+                                                                ctx.arc(milX, milY + cellSize, 40, 0, Math.PI*2);
+                                                                ctx.fill();
+                                                                globalGamePositions[numéroDeCase + 10] = "BLANCS";
+                                                                globalGamePositions[numéroDeCase] = "none";
 
+} else if (contains.color == 'none' && nbreDeCoupsJoués % 2 !== 0) { ctx.fillStyle = PionsBruns.color;
+    ctx.beginPath();
+    ctx.arc(milX, milY + cellSize, 40, 0, Math.PI*2);
+    ctx.fill();
+    globalGamePositions[numéroDeCase - 10] = "BRUNS";
+    globalGamePositions[numéroDeCase] = "none";
 
+}else{
+         alert("MOUVEMENT IMPOSSIBLE")}
+  nbreDeCoupsJoués+=1
+                                                                      })}
+
+                                                                       
+                                                                     
                                                                
 
-function GlobalInit(){InitialiseGrid();
-    initPionsBlancs();
-    initPionsBruns()}
+function FirstInit(){InitialiseGrid();
+                     initPionsBlancs();
+                     initPionsBruns()
+                     ncjPlayer();
+                     movement()}
+
+function initPions(){initPionsBlancs();
+                     initPionsBruns()}
  
   function playTheGame(){ncj();
                          Player();

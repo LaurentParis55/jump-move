@@ -1,9 +1,10 @@
 *{box-sizing: border-box; font-family: 'Quintessential'}
 #theCanvas{height:901px; height: 901px; position:absolute;  top:0; left:0; margin:0; cursor:grab}
-#demo{font-size: 29px; font-weight: bold; text-align: center; text-decoration: underline; position:absolute; top:0; right:75px;}
-#joueur{font-size: 29px; font-weight: bold; text-align: center; text-decoration: underline; position:absolute; top:55px; right:75px;}
+#demo{font-size: 25px; font-weight: bold; text-align: center; text-decoration: underline; position:absolute; top:0; right:75px;}
+#joueur{font-size: 25px; font-weight: bold; text-align: center; text-decoration: underline; position:absolute; top:55px; right:75px;}
 #tryer{position: absolute; top:25px; right:550px}
-#mvtGrabber{position: absolute; top:45px; right: 539px; font-weight: bold;}
+#mvtGrabber{ font-weight: bold;}
+#affichage>input{width:100px; height:25px; margin:25px 75px; float:right}
 nav{display:flex; justify-content: space-between; align-items: center; width:750px; height:90px; border:2px solid #99b5c9; position: absolute; top:175px; right:10px}
 .buttonContainer{width:28%; height:95%; display:flex; justify-content: space-around; align-items: center; }
 .mover{text-align: center; width:48%; height:98%; background: #c9a2c9; border:1px solid; border-radius:5px; font-size: 1.2rem; }
@@ -13,4 +14,6 @@ nav{display:flex; justify-content: space-between; align-items: center; width:750
     from   {background-color:#c9a2c9}
     to     {background-color:#a570a2}
   }
-  #affichage{border:5px solid #5a255a; width:800px; height:295px; position:absolute; top: 0; right:25px}
+  #affichage{border:5px solid #5a255a; width:800px; height:295px; position:absolute; top: 0; right:25px; display:flex; justify-content: space-between; align-items: center;}
+  .rubrique{width:49%; height:45%; border:1px solid red; position: relative; bottom:65px; margin:10px; display:flex; flex-wrap:wrap; justify-content: space-between; align-items: center;}
+  
