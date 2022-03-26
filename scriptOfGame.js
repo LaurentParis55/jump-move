@@ -118,6 +118,8 @@ function ncjPlayer() {
                                    
  
    function movement(){ canvas.addEventListener('click', function(e) {
+    var ArrayPionsBlancs = [[45,45],[135,45],[225,45],[315,45],[405,45],[495,45],[585,45],[675,45],[765,45],[855,45]];
+    var ArrayPionsBruns  = [[45,856],[135,856],[225,856],[315,856],[405,856],[495,856],[585,856],[675,856],[765,856],[855,856]];
     let valX = e.clientX/cellSize;
     let valY = e.clientY/cellSize;
     let colX = Math.ceil(valX);
@@ -132,24 +134,49 @@ function ncjPlayer() {
     
   ncjPlayer();
   console.log(contains);
-  if(contains.color == 'none' && nbreDeCoupsJoués % 2 == 0){    ctx.fillStyle = PionBlancs.color;
-                                                                ctx.beginPath();
-                                                                ctx.arc(milX, milY + cellSize, 40, 0, Math.PI*2);
-                                                                ctx.fill();
+  if(contains.color == 'none' && nbreDeCoupsJoués % 2 == 0){    
+                                                                const array1 = ArrayPionsBlancs[colX];
+                                                                array1[1] = (array1[1] + cellSize);
+                                                                ArrayPionsBlancs.splice(colX-1, 1, array1)
+                                                                console.log (ArrayPionsBlancs);
+                                                                
+                                                                    let setBlanc = new Pions (ArrayPionsBlancs[colX][0], ArrayPionsBlancs[colX][1]+cellSize, 'Silver', 100);
+                                                                    setBlanc.draw()
+                                                            
                                                                 globalGamePositions[numéroDeCase + 10] = "BLANCS";
                                                                 globalGamePositions[numéroDeCase] = "none";
+                                                                
+                                                                
+                                                                
+                                                                
+                                                               
+                                                                
+                                                            
+                                                            
 
 } else if (contains.color == 'none' && nbreDeCoupsJoués % 2 !== 0) { ctx.fillStyle = PionsBruns.color;
     ctx.beginPath();
-    ctx.arc(milX, milY + cellSize, 40, 0, Math.PI*2);
+    ctx.arc(milX, milY - cellSize, 40, 0, Math.PI*2);
     ctx.fill();
     globalGamePositions[numéroDeCase - 10] = "BRUNS";
     globalGamePositions[numéroDeCase] = "none";
+    alert(ArrayPionsBruns[colX][1] - cellSize);
 
 }else{
          alert("MOUVEMENT IMPOSSIBLE")}
   nbreDeCoupsJoués+=1
-                                                                      })}
+                                                                      
+  function actualize(){
+   
+    var colX
+    console.log(colX);}
+    actualize();
+
+
+
+})}
+
+
 
                                                                        
                                                                      
